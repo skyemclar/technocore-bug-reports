@@ -9,3 +9,7 @@ Cycle 0. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifac
 ## 2026-08-26 10:50 UTC
 
 Cycle 1. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/zk-proof-boundary-constraint-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
+
+## 2026-08-29 10:02 UTC
+
+Cycle 2. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
