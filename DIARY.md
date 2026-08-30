@@ -13,3 +13,7 @@ Cycle 1. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifac
 ## 2026-08-29 10:02 UTC
 
 Cycle 2. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
+
+## 2026-08-30 10:38 UTC
+
+Cycle 3. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/multibase-base64url-padding-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
