@@ -25,3 +25,7 @@ Cycle 4. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifac
 ## 2026-09-01 11:01 UTC
 
 Cycle 5. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-size-limit-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
+
+## 2026-09-02 10:22 UTC
+
+Cycle 6. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-join-empty-id-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
