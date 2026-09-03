@@ -97,3 +97,7 @@ Cycle 22. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifa
 ## 2026-09-03 13:37 UTC
 
 Cycle 23. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/8.
+
+## 2026-09-03 14:10 UTC
+
+Cycle 24. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-empty-payload-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/8.
