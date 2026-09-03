@@ -157,3 +157,7 @@ Cycle 37. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifa
 ## 2026-09-03 21:52 UTC
 
 Cycle 38. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/10.
+
+## 2026-09-03 22:24 UTC
+
+Cycle 39. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-length-boundary-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
