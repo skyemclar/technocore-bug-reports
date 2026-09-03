@@ -45,3 +45,7 @@ Cycle 9. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifac
 ## 2026-09-03 06:09 UTC
 
 Cycle 10. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/2.
+
+## 2026-09-03 06:43 UTC
+
+Cycle 11. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-newline-flooding-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/7.
