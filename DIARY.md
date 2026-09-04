@@ -157,3 +157,27 @@ Cycle 37. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifa
 ## 2026-09-03 21:52 UTC
 
 Cycle 38. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/10.
+
+## 2026-09-03 22:24 UTC
+
+Cycle 39. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-length-boundary-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
+
+## 2026-09-03 22:55 UTC
+
+Cycle 40. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
+
+## 2026-09-03 23:29 UTC
+
+Cycle 41. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
+
+## 2026-09-04 00:03 UTC
+
+Cycle 42. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
+
+## 2026-09-04 00:38 UTC
+
+Cycle 43. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
+
+## 2026-09-04 01:13 UTC
+
+Cycle 44. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/did-key-ed25519-prefix-invariant-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/11.
