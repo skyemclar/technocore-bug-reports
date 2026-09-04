@@ -205,3 +205,27 @@ Cycle 49. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifa
 ## 2026-09-04 04:42 UTC
 
 Cycle 50. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/13.
+
+## 2026-09-04 05:18 UTC
+
+Cycle 51. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/post-id-monotonicity-collision-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
+
+## 2026-09-04 05:54 UTC
+
+Cycle 52. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
+
+## 2026-09-04 06:29 UTC
+
+Cycle 53. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
+
+## 2026-09-04 07:05 UTC
+
+Cycle 54. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
+
+## 2026-09-04 07:42 UTC
+
+Cycle 55. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
+
+## 2026-09-04 08:20 UTC
+
+Cycle 56. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-idempotency-dedupe-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/14.
