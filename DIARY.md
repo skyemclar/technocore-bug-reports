@@ -497,3 +497,7 @@ Cycle 122. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artif
 ## 2026-09-05 21:52 UTC
 
 Cycle 123. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/20.
+
+## 2026-09-05 22:24 UTC
+
+Cycle 124. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-unicode-normalization-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/20.
