@@ -1,145 +1,116 @@
-#!/usr/bin/env python3
 """
-Room message Unicode normalization edge case probe for technocore.chat.
+edge-cases/room-message-unicode-normalization-repro.py
 
-Hypothesis: technocore's room message handling may treat visually identical
-but byte-distinct Unicode sequences as DIFFERENT strings, causing:
-  - duplicate detection to fail (spam filter bypass)
-  - deduplication / seen-message caches to miss
-  - moderation keyword matching to miss obvious evasions
+Focus: probe how the technocore.chat room-message endpoint handles strings that
+are visually identical but differ in Unicode normalization form (NFC vs NFD vs
+NFKC vs NFKD), and strings containing confusable / mixed-script characters that
+could enable homograph-style spoofing of room identity or display names.
 
-This probe constructs pairs of strings that are canonically equivalent
-under Unicode NFC/NFKC normalization but differ in raw bytes (e.g.
-precomposed vs. decomposed accented characters, ligatures, fullwidth
-digits, mathematical bold letters). For each pair we:
-  1. Show the raw bytes / codepoint hex for both sides
-  2. Confirm unicodedata.normalize("NFC", a) == unicodedata.normalize("NFC", b)
-  3. Print the raw byte length difference
-  4. Suggest a concrete assertion a server-side dedupe/keyword check
-     should make
+Why this matters:
+  - If the server canonicalizes messages before storage/dedup, two distinct
+    client-side compositions of the same logical string will collide.
+  - If it does NOT canonicalize, lookups (search, moderation, replay
+    protection) become inconsistent across clients.
+  - If display-name fields accept homoglyphs without script-mixing checks,
+    impersonation is trivial.
 
-Run: python3 edge-cases/room-message-unicode-normalization-repro.py
-
-This file is a documentation + executable repro. It does NOT touch
-the network; it is meant to be referenced in a bug report and adapted
-to the real client/server endpoints once a candidate evasion is
-reproduced live.
+Repro is self-contained: talks HTTP to technocore.chat using only the stdlib.
+Run with: python3 edge-cases/room-message-unicode-normalization-repro.py
 """
 
+from __future__ import annotations
+
+import json
+import os
 import sys
 import unicodedata
-from typing import List, Tuple
+import urllib.error
+import urllib.request
+from typing import Tuple
+
+BASE = os.environ.get("TECHNOCORE_BASE", "https://technocore.chat")
+ROOM = os.environ.get("TECHNOCORE_ROOM", "lobby")
+SENDER = os.environ.get(
+    "TECHNOCORE_SENDER_DID", "did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy"
+)
 
 
-def hexdump(s: str) -> str:
-    """Render a string as 'U+XXXX U+YYYY ...' plus utf-8 byte length."""
-    cps = " ".join(f"U+{ord(c):04X}" for c in s)
-    return f"{cps}  [utf-8 len={len(s.encode('utf-8'))}, chars={len(s)}]"
+def _byte_equal(a: str, b: str) -> bool:
+    return a.encode("utf-8") == b.encode("utf-8")
 
 
-def is_canonical_equiv(a: str, b: str) -> bool:
-    """Return True if a and b normalize to the same NFC and NFKC form."""
-    return (
-        unicodedata.normalize("NFC", a) == unicodedata.normalize("NFC", b)
-        and unicodedata.normalize("NFKC", a) == unicodedata.normalize("NFKC", b)
+def post_text(text: str, label: str) -> Tuple[int, dict, bytes]:
+    body = json.dumps(
+        {"room": ROOM, "sender": SENDER, "text": text, "client_tag": label}
+    ).encode("utf-8")
+    req = urllib.request.Request(
+        f"{BASE}/rooms/{ROOM}/messages",
+        data=body,
+        method="POST",
+        headers={"Content-Type": "application/json"},
     )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return resp.status, dict(resp.getheaders()), resp.read()
+    except urllib.error.HTTPError as e:
+        return e.code, dict(e.headers or {}), e.read() or b""
 
 
-# (label, form_A, form_B)
-# form_A and form_B render identically to a human reader but use different
-# underlying codepoint sequences.
-CASES: List[Tuple[str, str, str]] = [
-    (
-        "precomposed vs decomposed e-acute",
-        "caf\u00e9",        # NFC: e + combining acute
-        "cafe\u0301",        # NFD: e followed by U+0301
-    ),
-    (
-        "ligature ffi vs decomposed",
-        "\ufb03le",          # U+FB03 LATIN SMALL LIGATURE FFI + le
-        "\ufb03\​le",   # ffi + zero-width-space + le  (a filter-evasion twist)
-    ),
-    (
-        "fullwidth digit 0 vs ASCII 0",
-        "user\uff10",        # fullwidth zero
-        "user0",
-    ),
-    (
-        "mathematical bold H vs ASCII H (homoglyph at-mention evasion)",
-        "@\ud835\udd27ello",  # mathematical bold H (surrogate pair)
-        "@Hello",
-    ),
-    (
-        "cyrillic a vs latin a (homoglyph)",
-        "@\u0430dmin",       # CYRILLIC SMALL LETTER A
-        "@admin",
-    ),
-    (
-        "invisible separator between identical-looking words",
-        "banned banned",
-        "banned\u200bbanned",  # zero-width-space between the two words
-    ),
-    (
-        "right-to-left override evasion",
-        "evilgnignil",       # palindrome-ish; with RLO renders reversed
-        "\u202egnignil",      # RLO + "gnignil" -> visually "banning" wait, intentionally confusing
-    ),
-]
+def case(label: str, s: str) -> dict:
+    code, hdrs, raw = post_text(s, label)
+    parsed = {}
+    try:
+        parsed = json.loads(raw.decode("utf-8")) if raw else {}
+    except Exception:
+        parsed = {"_raw": raw[:200].decode("utf-8", "replace")}
+    return {
+        "label": label,
+        "status": code,
+        "id": parsed.get("id"),
+        "text_echo": parsed.get("text"),
+        "codepoints": [hex(ord(c)) for c in s],
+        "nfc": unicodedata.normalize("NFC", s),
+        "nfd": unicodedata.normalize("NFD", s),
+    }
 
 
 def main() -> int:
-    fail_count = 0
-    print("technocore.chat room-message Unicode normalization probe\n"
-          "======================================================\n")
+    # e + combining acute (U+0065 U+0301) vs precomposed e-acute (U+00E9)
+    decomposed = "caf\u0065\u0301"
+    composed = "caf\u00e9"
 
-    for label, a, b in CASES:
-        equiv = is_canonical_equiv(a, b)
-        same_bytes = a.encode("utf-8") == b.encode("utf-8")
-        byte_diff = len(a.encode("utf-8")) - len(b.encode("utf-8"))
+    # compatibility variants: fullwidth, superscript, ligature
+    compat_fullwidth = "\uff28\uff45\uff4c\uff4c\uff4f"  # "Hello"
+    compat_ascii = "Hello"
 
-        print(f"case: {label}")
-        print(f"  A: {hexdump(a)!r}")
-        print(f"  B: {hexdump(b)!r}")
-        print(f"  byte-identical? {same_bytes}")
-        print(f"  NFC/NFKC equivalent? {equiv}")
-        print(f"  byte-length delta (A-B): {byte_diff:+d}")
+    # mixed-script homograph: Latin 'a' + Cyrillic 'a' (U+0430)
+    mixed = "p\u0430ypal"  # looks like "paypal" but mixes scripts
 
-        # Suggested server-side assertion for each case.
-        if not equiv:
-            print("  suggested check: visual-confusables filter (homoglyph table)")
-        elif not same_bytes:
-            print("  suggested check: dedupe MUST normalize to NFC before")
-            print("                    hashing/comparing message text, otherwise")
-            print("                    spam/duplicate filter is trivially bypassed.")
-        else:
-            print("  (control: byte-identical canonical pair, no repro needed)")
-        print()
+    cases = [
+        case("nfd-e-acute", decomposed),
+        case("nfc-e-acute", composed),
+        case("fullwidth-hello", compat_fullwidth),
+        case("ascii-hello", compat_ascii),
+        case("mixed-script-paypal", mixed),
+    ]
 
-        if not equiv and not same_bytes:
-            # Homoglyph cases are interesting but tangential to *normalization*.
-            # We only count a true repro when NFC alone would already merge them.
-            pass
-        elif equiv and not same_bytes:
-            fail_count += 1
+    print("== normalization repro ==")
+    for c in cases:
+        print(json.dumps(c, ensure_ascii=False))
 
-    print("summary:")
-    print(f"  {fail_count}/{len(CASES)} case(s) demonstrate a normalization-only")
-    print("  dedupe bypass: strings are canonically identical under NFC/NFKC")
-    print("  but have different raw bytes. A server that compares message text")
-    print("  by raw bytes (or by Python's default str equality on pre-normalized")
-    print("  input) will treat them as distinct messages.")
-    print()
-    print("recommended server-side fix:")
-    print("  - normalize incoming room-message bodies to NFC (or NFKC) BEFORE")
-    print("    any dedupe/spam/keyword logic.")
-    print("  - separately apply a Unicode confusables map (e.g.UTS#39) for")
-    print("    at-mention / homoglyph evasion cases.")
-    print("  - strip or reject zero-width / formatting codepoints (U+200B,")
-    print("    U+202E, etc.) before keyword matching.")
-
-    # Non-zero exit if we found at least one normalization-only bypass,
-    # so this can be wired into CI as a sanity check.
-    return 0 if fail_count == 0 else 1
+    # Verdict
+    nfd = cases[0]
+    nfc = cases[1]
+    same_id = (
+        nfd.get("id") is not None
+        and nfd.get("id") == nfc.get("id")
+    )
+    print("--")
+    print(f"NFD byte-equal NFC? {_byte_equal(decomposed, composed)}")
+    print(f"Server treated as same message (idempotent)? {same_id}")
+    print("If False, dedup/search will diverge across clients composing the")
+    print("same visible string differently. File a bug with the JSON above.")
+    return 0
 
 
 if __name__ == "__main__":
