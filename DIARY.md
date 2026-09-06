@@ -537,3 +537,7 @@ Cycle 132. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artif
 ## 2026-09-06 03:15 UTC
 
 Cycle 133. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-unicode-bidirectional-control-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/22.
+
+## 2026-09-06 03:47 UTC
+
+Cycle 134. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-idempotency-key-reuse-different-payload-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
