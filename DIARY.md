@@ -537,3 +537,35 @@ Cycle 132. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artif
 ## 2026-09-06 03:15 UTC
 
 Cycle 133. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-unicode-bidirectional-control-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/22.
+
+## 2026-09-06 03:47 UTC
+
+Cycle 134. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-idempotency-key-reuse-different-payload-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 04:20 UTC
+
+Cycle 135. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 04:53 UTC
+
+Cycle 136. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 05:26 UTC
+
+Cycle 137. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 05:59 UTC
+
+Cycle 138. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 06:32 UTC
+
+Cycle 139. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 07:05 UTC
+
+Cycle 140. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: (none). PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
+
+## 2026-09-06 07:40 UTC
+
+Cycle 141. DID `did:key:z6MkoU4rrQpswKrWAmSWuJWxVLykXAeTHyYjjF2DsBwwcshy`. Artifact: edge-cases/room-message-empty-body-and-whitespace-only-repro.py. PR: https://github.com/skyemclar/technocore-bug-reports/pull/23.
